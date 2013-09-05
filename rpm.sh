@@ -48,26 +48,6 @@ echo "You choose = $SOFTWARE"
 echo "---------------------------"
 echo ""
 
-echo "Please enter the VPN/SS5 username:"
-read -p "(Default username: xiaosong):" USERNAME
-if [ -z $USERNAME ]; then
-	USERNAME="xiaosong"
-fi
-echo "---------------------------"
-echo "VPN/SS5 username = $USERNAME"
-echo "---------------------------"
-echo ""
-
-echo "Please enter the VPN/SS5 password:"
-read -p "(Default password: fuckGFW123):" PASSWORD
-if [ -z $PASSWORD ]; then
-	PASSWORD="fuckGFW123"
-fi
-echo "---------------------------"
-echo "VPN/SS5 password = $PASSWORD"
-echo "---------------------------"
-echo ""
-
 if [ "$SOFTWARE" != 1 ];then
 
 	echo "Please enter the SS5 port(建议走大端口10000以上):"
@@ -87,6 +67,48 @@ if [ "$SOFTWARE" != 1 ];then
 	fi
 	echo "---------------------------"
 	echo "You choose = $AUTH"
+	echo "---------------------------"
+	echo ""
+
+	if [ "$SOFTWARE" = 3 ] && [ "$AUTH" != 'n' ];then
+		echo "Please enter the VPN/SS5 username:"
+		read -p "(Default username: xiaosong):" USERNAME
+		if [ -z $USERNAME ]; then
+			USERNAME="xiaosong"
+		fi
+		echo "---------------------------"
+		echo "VPN/SS5 username = $USERNAME"
+		echo "---------------------------"
+		echo ""
+
+		echo "Please enter the VPN/SS5 password:"
+		read -p "(Default password: fuckGFW123):" PASSWORD
+		if [ -z $PASSWORD ]; then
+			PASSWORD="fuckGFW123"
+		fi
+		echo "---------------------------"
+		echo "VPN/SS5 password = $PASSWORD"
+		echo "---------------------------"
+		echo ""
+	fi
+else
+	echo "Please enter the VPN username:"
+	read -p "(Default username: xiaosong):" USERNAME
+	if [ -z $USERNAME ]; then
+		USERNAME="xiaosong"
+	fi
+	echo "---------------------------"
+	echo "VPN username = $USERNAME"
+	echo "---------------------------"
+	echo ""
+
+	echo "Please enter the VPN password:"
+	read -p "(Default password: fuckGFW123):" PASSWORD
+	if [ -z $PASSWORD ]; then
+		PASSWORD="fuckGFW123"
+	fi
+	echo "---------------------------"
+	echo "VPN password = $PASSWORD"
 	echo "---------------------------"
 	echo ""
 fi
@@ -273,9 +295,16 @@ EOF
 		mkdir -p src/
 	fi
 	\mv ./{*gz,*-*/} ./src >/dev/null 2>&1
+
 	iptables -I INPUT -p tcp --dport $PORT -j ACCEPT
 	/etc/rc.d/init.d/iptables save
 	/etc/rc.d/init.d/iptables restart
+
+	mv /usr/lib/ss5/mod_socks4.so /usr/lib/ss5/mod_socks4.so.bk
+
+	chkconfig ss5 on
+	chmod 0755 /etc/init.d/ss5
+	/etc/init.d/ss5 restart
 fi
 
 clear
