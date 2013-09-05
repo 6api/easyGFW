@@ -68,25 +68,28 @@ echo "VPN/SS5 password = $PASSWORD"
 echo "---------------------------"
 echo ""
 
-echo "Please enter the SS5 port(建议走大端口10000以上):"
-read -p "(Default port: 18888):" PORT
-if [ -z $PORT ]; then
-	PORT="18888"
-fi
-echo "---------------------------"
-echo "VPN/SS5 port = $PORT"
-echo "---------------------------"
-echo ""
+if [ "$SOFTWARE" != 1 ];then
 
-echo "Is SS5 need auth ? (y/n)"
-read -p "(Default : n):" AUTH
-if [ -z $AUTH ]; then
-	AUTH="n"
+	echo "Please enter the SS5 port(建议走大端口10000以上):"
+	read -p "(Default port: 18888):" PORT
+	if [ -z $PORT ]; then
+		PORT="18888"
+	fi
+	echo "---------------------------"
+	echo "VPN/SS5 port = $PORT"
+	echo "---------------------------"
+	echo ""
+
+	echo "Is SS5 need auth ? (y/n)"
+	read -p "(Default : n):" AUTH
+	if [ -z $AUTH ]; then
+		AUTH="n"
+	fi
+	echo "---------------------------"
+	echo "You choose = $AUTH"
+	echo "---------------------------"
+	echo ""
 fi
-echo "---------------------------"
-echo "You choose = $AUTH"
-echo "---------------------------"
-echo ""
 
 get_char()
 {
@@ -282,7 +285,7 @@ echo ""
 echo "Server ip address: $IP_ADDRESS"
 echo "VPN/SS5 username: $USERNAME"
 echo "VPN/SS5 password: $PASSWORD"
-echo "SS5 port: $PORT"
+[ "$SOFTWARE" != "1" ] && echo "SS5 port: $PORT"
 echo ""
 echo ""
 echo "============================================================="
