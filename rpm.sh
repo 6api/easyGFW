@@ -101,6 +101,7 @@ if [ "$SOFTWARE" != 1 ];then
 			echo "SS5 password = $PASSWORD"
 			echo "---------------------------"
 			echo ""
+		fi
 	fi
 	echo "Please enter the SS5 port(建议走大端口10000以上):"
 	read -p "(Default port: 18888):" PORT
