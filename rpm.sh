@@ -221,6 +221,7 @@ EOF
 
 	iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -j SNAT --to-source $IP_ADDRESS
 	iptables -A FORWARD -p tcp --syn -s 192.168.0.0/24 -j TCPMSS --set-mss 1356
+	iptables -I INPUT -p tcp --dport 1723 -j ACCEPT
 
 	/etc/init.d/iptables save
 	/etc/init.d/iptables restart
@@ -272,9 +273,9 @@ EOF
 		mkdir -p src/
 	fi
 	\mv ./{*gz,*-*/} ./src >/dev/null 2>&1
-	#/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-	#/etc/rc.d/init.d/iptables save
-	#/etc/rc.d/init.d/iptables restart
+	iptables -I INPUT -p tcp --dport $PORT -j ACCEPT
+	/etc/rc.d/init.d/iptables save
+	/etc/rc.d/init.d/iptables restart
 fi
 
 clear
