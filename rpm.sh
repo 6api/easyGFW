@@ -203,7 +203,7 @@ fi
 
 echo "---------- Dependent Packages ----------"
 
-yum -y install wget tar gcc automake make iptables
+yum -y install wget tar gcc automake make iptables openssl openssl-devel
 
 if [ "$SOFTWARE" != 2 ];then
 	yum -y install ppp
@@ -312,8 +312,8 @@ echo ""
 echo "easyGFW install completed!"
 echo ""
 echo "Server ip address: $IP_ADDRESS"
-echo "VPN/SS5 username: $USERNAME"
-echo "VPN/SS5 password: $PASSWORD"
+[ "$AUTH" != "n" ] && echo "VPN/SS5 username: $USERNAME"
+[ "$AUTH" != "n" ] && echo "VPN/SS5 password: $PASSWORD"
 [ "$SOFTWARE" != "1" ] && echo "SS5 port: $PORT"
 echo ""
 echo ""
