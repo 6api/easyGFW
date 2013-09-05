@@ -203,9 +203,7 @@ fi
 
 echo "---------- Dependent Packages ----------"
 
-yum -y install gcc automake make iptables
-yum -y install wget tar curl curl-devel
-yum -y install openssl openssl-devel
+yum -y install wget tar gcc automake make iptables
 
 if [ "$SOFTWARE" != 2 ];then
 	yum -y install ppp
