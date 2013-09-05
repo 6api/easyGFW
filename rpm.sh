@@ -222,10 +222,11 @@ EOF
 	iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -j SNAT --to-source $IP_ADDRESS
 	iptables -A FORWARD -p tcp --syn -s 192.168.0.0/24 -j TCPMSS --set-mss 1356
 
-	etc/init.d/iptables save
+	/etc/init.d/iptables save
 	/etc/init.d/iptables restart
 
-	/etc/init.d/pptpd restart
+	/etc/init.d/pptpd restart-kill
+	/etc/init.d/pptpd start
 
 	chkconfig pptpd on
 	chkconfig iptables on
