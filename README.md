@@ -15,9 +15,9 @@
 
 ## 三、联系方式
 
-> Email: [sahala_2007#126.com](sahala_2007#126.com) （推荐） 
-> Weibo：[@徐岳松](https://weibo.com/tbyuesong) 
-> Home Page: [Blog](http://xiaosong.org/) 
+> Email: [sahala_2007#126.com](sahala_2007#126.com) （推荐）  
+> Weibo：[@徐岳松](https://weibo.com/tbyuesong)  
+> Home Page: [Blog](http://xiaosong.org/)  
 
 ## 四、TODO
-> 暂无 
+> 增加是否支持安装VPN的判断  
