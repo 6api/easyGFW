@@ -61,25 +61,47 @@ if [ "$SOFTWARE" != 1 ];then
 	echo ""
 
 	if [ "$SOFTWARE" = 3 ];then
-		echo "Please enter the VPN/SS5 username:"
-		read -p "(Default username: xiaosong):" USERNAME
-		if [ -z $USERNAME ]; then
-			USERNAME="xiaosong"
-		fi
-		echo "---------------------------"
-		echo "VPN/SS5 username = $USERNAME"
-		echo "---------------------------"
-		echo ""
+		if [ "$AUTH" != 'n' ];then
+			echo "Please enter the VPN/SS5 username:"
+			read -p "(Default username: xiaosong):" USERNAME
+			if [ -z $USERNAME ]; then
+				USERNAME="xiaosong"
+			fi
+			echo "---------------------------"
+			echo "VPN/SS5 username = $USERNAME"
+			echo "---------------------------"
+			echo ""
 
-		echo "Please enter the VPN/SS5 password:"
-		read -p "(Default password: fuckGFW123):" PASSWORD
-		if [ -z $PASSWORD ]; then
-			PASSWORD="fuckGFW123"
+			echo "Please enter the VPN/SS5 password:"
+			read -p "(Default password: fuckGFW123):" PASSWORD
+			if [ -z $PASSWORD ]; then
+				PASSWORD="fuckGFW123"
+			fi
+			echo "---------------------------"
+			echo "VPN/SS5 password = $PASSWORD"
+			echo "---------------------------"
+			echo ""
+		else
+			echo "Please enter the VPN username:"
+			read -p "(Default username: xiaosong):" USERNAME
+			if [ -z $USERNAME ]; then
+				USERNAME="xiaosong"
+			fi
+			echo "---------------------------"
+			echo "VPN username = $USERNAME"
+			echo "---------------------------"
+			echo ""
+
+			echo "Please enter the VPN password:"
+			read -p "(Default password: fuckGFW123):" PASSWORD
+			if [ -z $PASSWORD ]; then
+				PASSWORD="fuckGFW123"
+			fi
+			echo "---------------------------"
+			echo "VPN password = $PASSWORD"
+			echo "---------------------------"
+			echo ""
 		fi
-		echo "---------------------------"
-		echo "VPN/SS5 password = $PASSWORD"
-		echo "---------------------------"
-		echo ""
 	else
 		if [ "$AUTH" != 'n' ];then
 			echo "Please enter the SS5 username:"
@@ -333,8 +355,8 @@ echo ""
 echo "easyGFW install completed!"
 echo ""
 echo "Server ip address: $IP_ADDRESS"
-[ "$AUTH" != "n" ] && echo "VPN/SS5 username: $USERNAME"
-[ "$AUTH" != "n" ] && echo "VPN/SS5 password: $PASSWORD"
+[ "$SOFTWARE" != "3" ] && [ "$AUTH" != "n" ] && echo "VPN/SS5 username: $USERNAME"
+[ "$SOFTWARE" != "3" ] && [ "$AUTH" != "n" ] && echo "VPN/SS5 password: $PASSWORD"
 [ "$SOFTWARE" != "1" ] && echo "SS5 port: $PORT"
 echo ""
 echo ""
