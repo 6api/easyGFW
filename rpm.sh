@@ -50,16 +50,6 @@ echo ""
 
 if [ "$SOFTWARE" != 1 ];then
 
-	echo "Please enter the SS5 port(建议走大端口10000以上):"
-	read -p "(Default port: 18888):" PORT
-	if [ -z $PORT ]; then
-		PORT="18888"
-	fi
-	echo "---------------------------"
-	echo "VPN/SS5 port = $PORT"
-	echo "---------------------------"
-	echo ""
-
 	echo "Is SS5 need auth ? (y/n)"
 	read -p "(Default : n):" AUTH
 	if [ -z $AUTH ]; then
@@ -70,7 +60,7 @@ if [ "$SOFTWARE" != 1 ];then
 	echo "---------------------------"
 	echo ""
 
-	if [ "$SOFTWARE" = 3 ] && [ "$AUTH" != 'n' ];then
+	if [ "$SOFTWARE" = 3 ];then
 		echo "Please enter the VPN/SS5 username:"
 		read -p "(Default username: xiaosong):" USERNAME
 		if [ -z $USERNAME ]; then
@@ -90,7 +80,37 @@ if [ "$SOFTWARE" != 1 ];then
 		echo "VPN/SS5 password = $PASSWORD"
 		echo "---------------------------"
 		echo ""
+	else
+		if [ "$AUTH" != 'n' ];then
+			echo "Please enter the SS5 username:"
+			read -p "(Default username: xiaosong):" USERNAME
+			if [ -z $USERNAME ]; then
+				USERNAME="xiaosong"
+			fi
+			echo "---------------------------"
+			echo "SS5 username = $USERNAME"
+			echo "---------------------------"
+			echo ""
+
+			echo "Please enter the SS5 password:"
+			read -p "(Default password: fuckGFW123):" PASSWORD
+			if [ -z $PASSWORD ]; then
+				PASSWORD="fuckGFW123"
+			fi
+			echo "---------------------------"
+			echo "SS5 password = $PASSWORD"
+			echo "---------------------------"
+			echo ""
 	fi
+	echo "Please enter the SS5 port(建议走大端口10000以上):"
+	read -p "(Default port: 18888):" PORT
+	if [ -z $PORT ]; then
+		PORT="18888"
+	fi
+	echo "---------------------------"
+	echo "VPN/SS5 port = $PORT"
+	echo "---------------------------"
+	echo ""
 else
 	echo "Please enter the VPN username:"
 	read -p "(Default username: xiaosong):" USERNAME
