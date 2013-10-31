@@ -262,9 +262,9 @@ if [ "$SOFTWARE" != 2 ];then
 	echo "---------- VPN ----------"
 
 	if [ `getconf WORD_BIT` = '32' ] && [ `getconf LONG_BIT` = '64' ] ; then
-		rpm -ivh http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.3.4-2.el6.x86_64.rpm
+		rpm -ivh http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm
 	else
-		rpm -ivh http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.3.4-2.el6.i686.rpm
+		rpm -ivh http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.i686.rpm
 	fi
 
 	cat >>/etc/pptpd.conf<<-EOF
