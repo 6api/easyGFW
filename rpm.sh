@@ -186,18 +186,18 @@ else
 	echo "Network OK"
 fi
 
-echo "---------- System Check ----------"
+#echo "---------- System Check ----------"
 
-if [ "$SOFTWARE" != 2 ];then
-	modprobe ppp-compress-18 &>/dev/null && PPP=1 || PPP=0
+#if [ "$SOFTWARE" != 2 ];then
+#	modprobe ppp-compress-18 &>/dev/null && PPP=1 || PPP=0
 
-	if [ "$PPP" = 0 ];then
-		echo "System Check Failed! Please contract your provider to enable VPN service!"
-		exit
-	else
-		echo "System OK"
-	fi
-fi
+#	if [ "$PPP" = 0 ];then
+#		echo "System Check Failed! Please contract your provider to enable VPN service!"
+#		exit
+#	else
+#		echo "System OK"
+#	fi
+#fi
 
 echo "---------- Update System ----------"
 
