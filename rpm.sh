@@ -268,23 +268,32 @@ if [ "$SOFTWARE" != 2 ];then
 	fi
 
 	cat >>/etc/pptpd.conf<<-EOF
-localip 192.168.0.1
-remoteip 192.168.0.234-238,192.168.0.245
+localip 192.168.8.1
+remoteip 192.168.8.234-238,192.168.8.245
+
 EOF
 
 	cat >>/etc/ppp/options.pptpd<<-EOF
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
+
 EOF
 
 
 	cat >>/etc/ppp/chap-secrets<<-EOF
 $USERNAME pptpd $PASSWORD *
+
 EOF
 
-	iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -j SNAT --to-source $IP_ADDRESS
-	iptables -A FORWARD -p tcp --syn -s 192.168.0.0/24 -j TCPMSS --set-mss 1356
+	ETH=`ifconfig | grep 'eth' | awk '{print $1}'`
+	if [ "$ETH" != '' ];then
+		iptables -t nat -A POSTROUTING -s 192.168.8.0/24 -o $ETH -j MASQUERADE
+	else
+		iptables -t nat -A POSTROUTING -s 192.168.8.0/24 -j SNAT --to-source $IP_ADDRESS
+	fi
+	iptables -A FORWARD -p tcp --syn -s 192.168.8.0/24 -j TCPMSS --set-mss 1356
 	iptables -I INPUT -p tcp --dport 1723 -j ACCEPT
+	iptables -A INPUT -p gre -j ACCEPT
 
 	/etc/init.d/iptables save
 	/etc/init.d/iptables restart
@@ -295,7 +304,6 @@ EOF
 	chkconfig pptpd on
 	chkconfig iptables on
 
-	mknod /dev/ppp c 108 0
 fi
 
 if [ "$SOFTWARE" != 1 ];then
